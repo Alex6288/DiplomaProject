@@ -1,0 +1,101 @@
+.header-top {
+    border-bottom: 1px black solid;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.header-top-menu, .header-top-signup {
+    /*display: inline-block;*/
+    display: flex;
+    flex-wrap: wrap;
+    width: max-content;
+    justify-content: space-around;
+
+}
+.header-top-signup {
+    display: flex;
+    flex-flow: nowrap column;
+    justify-content: flex-end;
+}
+.header-top-signup-item{
+    display: flex;
+    flex-flow: nowrap row;
+    justify-content: flex-start;
+    margin: 0.5em;
+}
+.header-top-signup-item-elem{
+    display: flex;
+    margin: 0.5em;
+}
+.header-top-signup-item-login{
+    background-color: greenyellow;
+    font-size: 1.2em;
+}
+
+.header-top-menu-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 1em;
+}
+
+.header-top-signup-icon{
+    height: 1.5em;
+    width: auto;
+}
+.header-top-signup-item-login{
+    margin: 0.5em;
+}
+
+.header-bot {
+
+}
+
+.header-logo-img{
+    height: 3em;
+    width: auto;
+}
+
+.header-bot-first{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.header-bot-find-line, .header-bot-bag-box, .header-bot-logo {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row-reverse;
+    margin: 10px;
+    height: 1.5em;
+}
+
+#findInput {
+    width: 350px;
+    min-width: 90px;
+    max-width: 400px;
+    transition: width 0.25s;
+}
+
+.search-icon{
+    height: 1em;
+    width: auto;
+}
+
+.header-bot-products-menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.header-bot-products-menu-item {
+    margin: 10px;
+}
+
+.header-bot-bag-box-icon{
+    height: 3.5em;
+    width: auto;
+}

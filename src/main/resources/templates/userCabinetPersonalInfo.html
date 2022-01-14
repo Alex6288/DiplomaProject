@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <th:block th:include="/_main_block_css"></th:block>
+    <link rel="stylesheet" th:href="@{/css/userInfo.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/userCabinet.css}" type="text/css">
+</head>
+<body>
+<th:block th:include="/_header"></th:block>
+<!--todo доделать чтобы информация сразу отображалась из таблицы хранилища-->
+<div class="main-block">
+    <th:block th:include="/_userCabinetPanel"></th:block>
+    <div class="main-block-element-content">
+        <h3 th:if="${message}" th:text="${message}" style="color:green"></h3>
+        <h3 th:if="${error != null}" th:text="${error}"></h3>
+        <form th:unless="${error != null}" th:action="@{/user/updateInfo}" th:method="post" th:object="${user}">
+            <h3 class="registration-data-input-head registration-data-input-item">Персональная информация</h3>
+            <div class="registration-data-input-login registration-data-input-item">
+                <div>Логин :</div>
+                <input type="text" name="login" th:field="*{login}" readonly>
+            </div>
+            <div class="registration-data-input-first-name registration-data-input-item">
+                <div class="errod-msg" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+                <div>Имя :
+                    <input type="text" name="firstName" th:field="*{firstName}" required>
+                </div>
+            </div>
+            <div class="registration-data-input-last-name registration-data-input-item">
+                <div class="errod-msg" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+                <div>Фамилия :
+                    <input type="text" name="lastName" th:field="*{lastName}" required>
+                </div>
+            </div>
+            <div class="registration-data-input-middle-name registration-data-input-item">
+                <div class="errod-msg" th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}"></div>
+                <div>
+                    Отчество : <input type="text" name="middleName" th:field="*{middleName}" required>
+                </div>
+            </div>
+            <div class="registration-data-input-phone registration-data-input-item">
+                <div class="errod-msg" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
+                <div>Номер телефона :
+                    <input type="tel" name="phone" th:field="*{phone}" required>
+                </div>
+            </div>
+            <div class="registration-data-input-email registration-data-input-item">
+                <div class="errod-msg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                <div>Электронная почта :
+                <input type="email" name="email" th:field="*{email}" readonly>
+                </div>
+            </div>
+            <div class="registration-data-input-country-name registration-data-input-item">
+                <div class="errod-msg" th:if="${#fields.hasErrors('countryName')}" th:errors="*{countryName}"></div>
+                <div>Страна : <input type="text" name="countryName" th:field="*{countryName}" required>
+                </div>
+            </div>
+            <div class="registration-data-input-city-name registration-data-input-item">
+                <div class="errod-msg" th:if="${#fields.hasErrors('cityName')}" th:errors="*{cityName}"></div>
+                <div>Город : <input type="text" name="cityName" th:field="*{cityName}" required>
+                </div>
+            </div>
+            <div class="registration-data-submit registration-data-input-item">
+                <input type="submit" value="Обновить информацию">
+            </div>
+        </form>
+    </div>
+    <div class="history-orders">
+        <!--        todo вставить лист с количеством заказов, номером и суммой-->
+    </div>
+</div>
+<th:block th:include="/_footer"></th:block>
+</body>
+</html>

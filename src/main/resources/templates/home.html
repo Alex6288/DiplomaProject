@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    <th:block th:include="/_main_block_css"></th:block>
+    <link rel="stylesheet" th:href="@{/css/pop_prod.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/recipes-articles.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/manufacturing.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/dscr-shop.css}" type="text/css">
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<body>
+<th:block th:include="/_header"></th:block>
+<div class="content">
+    <h2 class="content-popular-product-header">Популярные товары</h2>
+    <div class="content-popular-product">
+        <!--        Динамическое добавление популярных продуктов-->
+        <div class="content-popular-product-item" th:each="product :${popularProduct}">
+                <img class="content-popular-product-item-foto" th:src="@{${product.mainPhotoPath}}" alt="foto prod">
+                <p class="content-popular-product-item-short_dscr" th:text="${product.productName}"> Описание товара</p>
+                <p class="content-popular-product-item-rating" th:text="${'Рейтинг :' + product.getRating()}"></p>
+                <p class="content-popular-product-item-price" th:text="${'Стоимость :' + product.price}"></p>
+                <button th:id="${product.id}" onclick="addProductToShopCart(this.id)" class="content-popular-product-item-add_button">В корзину</button>
+        </div>
+    </div>
+    <h2 class="content-articles-and-recipes-header">Статьи и рецепты</h2>
+    <div class="content-articles-and-recipes">
+        <!--        Динамическое добавление статей-->
+        <div class="content-articles-and-recipes-item" th:each="news :${newses}">
+            <a th:href="@{${news.urlPage}}"><img class="content-articles-and-recipes-img" th:src="@{${news.mainPhotoPath}}" alt="картинка новости"></a>
+            <p class="content-articles-and-recipes-short-dscr" th:text="${news.dscrShort}"> Краткое описание </p>
+        </div>
+    </div>
+    <h2 class="content-manufacturing-header">Производители</h2>
+    <div class="content-manufacturing">
+        <!--        Динамическое добавление лого производителей-->
+        <div class="content-manufacturing-item" th:each="path : ${brandsLogos}">
+            <img class="content-manufacturing-img" th:src="@{${path}}" alt="Лого производителя">
+        </div>
+    </div>
+    <h2 class="content-dscr-shop-header">Интернет-магазин экопродуктов в Екатеринбурге</h2>
+    <div class="content-dscr-shop">
+        <div class="content-dscr-shop-item">
+            <p class="content-dscr-shop-content">ЭкоРусь – интернет-магазин для здоровой жизни. В ассортименте компании большой выбор органического питания, витамины, биодобавки, натуральная уходовая косметика, экологически безопасные товары для быта и жилья. Магазин сотрудничает с проверенными производителями России и зарубежья, вся продукция проходит обязательную сертификацию, а некоторые из товаров проходят дополнительную независимую экспертизу. Мы заботимся о качестве продуктов, которые Вам предлагаем.
+                В магазине Эковедиа легко найти продукты для правильного питания, очищения организма и стройности. Мамы порадуют своих детей сладостями без сахара, спортсмены найдут добавки для набора мышечной массы, витамины и суперфуды помогут оставаться здоровыми круглый год, натуральная косметика и товары для быта исключат возможность аллергии, а люди с особыми диетами смогут не отказывать себе в любимых продуктах. Все товары представлены в каталоге на сайте www. .ru
+                Вы можете оформить заказ на сайте с доставкой по городу или по всей России, а также прийти за покупкой в оффлайн-магазин по адресу Свердловская область село Верхний Бардым  Мы открыты для вопросов и предложений, и с радостью поможем сориентироваться в выборе товаров.
+                Приобщайся к здоровой жизни!</p>
+        </div>
+    </div>
+</div>
+
+<th:block th:include="/_footer"></th:block>
+
+</body>
+</html>

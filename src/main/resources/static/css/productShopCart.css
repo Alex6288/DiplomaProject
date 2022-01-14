@@ -1,0 +1,28 @@
+.main-block {
+    display: flex;
+    flex-flow: nowrap column;
+    margin: 0.5em;
+    background: -webkit-linear-gradient(top, forestgreen, greenyellow);
+    background: -o-linear-gradient(top, forestgreen, greenyellow);
+    background: -ms-linear-gradient(top, forestgreen, greenyellow);
+}
+.table-item{
+    border: black 1px solid;
+    padding: 0.5em;
+}
+.table-item-num{
+    width: 3em;
+}
+
+.order-form{
+    display: flex;
+    flex-flow: nowrap column;
+    margin: 0.5em;
+}
+
+.order-form-item{
+    display: flex;
+    width: max-content;
+    margin: 0.5em;
+    padding: 0.5em;
+}

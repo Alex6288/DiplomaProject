@@ -1,0 +1,31 @@
+.content-articles-and-recipes-header{
+    text-align: center;
+}
+.content-articles-and-recipes{
+    display: flex;
+    height: max-content;
+    justify-content: space-around;
+    flex-flow: row wrap;
+}
+
+.content-articles-and-recipes-item {
+    display: flex;
+    flex-flow: wrap column;
+    justify-content: center;
+    margin: 1em;
+    width: 15em;
+    height: 15em;
+    overflow: hidden;
+    border: black 1px solid;
+    border-radius: 1em;
+}
+
+.content-articles-and-recipes-img {
+    width: 12em;
+    height: auto;
+}
+
+.content-articles-and-recipes-short-dscr {
+    text-align: center;
+    font-size: 1.2em;
+}

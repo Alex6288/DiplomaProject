@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Магазин</title>
+    <th:block th:include="/_main_block_css"></th:block>
+    <link rel="stylesheet" th:href="@{/css/product_shop.css}" type="text/css">
+</head>
+
+<body>
+<th:block th:include="/_header"></th:block>
+
+<div class="content-main-block">
+    <div class="content-filter-block">
+        <button onclick="showFilterBlock()" class="button-show-filter-block">Фильтровать</button>
+        <form  class="content-filter-block-hidden" id="filterBlock" >
+            <div class="filter-item">
+                По названию :&nbsp;<input type="text" name="findByName">
+            </div>
+            <div class="filter-item">
+                <div class="filter-item-element"><h3>По бренду :</h3></div>
+                <div class=" filter-item-element-checkbox">
+                    <div class="filter-item-brend" th:each="brand : ${brandList}">
+                        <input type="checkbox" name="brandNames" th:value="${brand}"> <span>[[${brand}]]</span>
+                    </div>
+                </div>
+                <div class="filter-item-element"><h3>По цене :</h3></div>
+                <div class="filter-item-price filter-item-element">
+                    От <input type="number" name="priceStart" value=""> <br>
+                    До <input type="number" name="priceEnd" value="">
+                </div>
+                <div class="filter-item-element"><h3>По категории :</h3></div>
+                <div class=" filter-item-element">
+                    <!--                    <input type="checkbox" name="categoryNames" value="" checked style="display: none">-->
+                    <div class="filter-item-category" th:each="category : ${categoryList}">
+                        <input type="checkbox" name="categoryNames" th:value="${category.categoryName}"> <span>[[${category.categoryName}]]</span>
+                    </div>
+                </div>
+            </div>
+            <div class="search-link filter-item-element">
+                <input class="button-search" id="searchButton" type="button" value="Поиск">
+            </div>
+        </form>
+    </div>
+    <div class="content-products-block" id="content-products-block">
+        <!--            Динамическое наполнение блоков -->
+        <div class="pagination" id="pagination">
+        </div>
+        <div class="content-products-block-product-list" id="content-products-block-product-list">
+        </div>
+    </div>
+</div>
+
+<th:block th:include="/_footer"></th:block>
+
+<script type="text/javascript" th:src="@{/js/productShop.js}"></script>
+</body>
+</html>

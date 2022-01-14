@@ -1,0 +1,48 @@
+.main-block{
+    font-size: 1.5em;
+    display: flex;
+    background: -webkit-linear-gradient(top, forestgreen, greenyellow);
+    background: -o-linear-gradient(top, forestgreen, greenyellow);
+    background: -ms-linear-gradient(top, forestgreen, greenyellow);
+    flex-flow: nowrap row;
+    justify-content: flex-start;
+}
+.main-block-element {
+    display: flex;
+    flex-flow: nowrap column;
+    width: max-content;
+    padding: 0.5em;
+}
+.main-block-element-content{
+    display: flex;
+    flex-flow: nowrap column;
+    padding: 0.5em;
+}
+.element-manage-panel-item{
+    display: flex;
+    margin: 1em;
+}
+.main-block-element-item{
+    display: flex;
+    margin: 1em;
+    flex-flow: wrap row;
+}
+.panel-item {
+    display: flex;
+    flex-flow: wrap row;
+    margin: 1em;
+}
+.btn-panel{
+    padding: 0.5em;
+    font-size: 1em;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+td{
+    padding: 0.5em;
+    border: black 1px solid;
+    width: max-content;
+}

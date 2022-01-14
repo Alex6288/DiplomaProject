@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление бренда</title>
+    <link rel="stylesheet" th:href="@{/css/categoryAdd.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/header.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/footer.css}" type="text/css">
+</head>
+<body>
+<th:block th:include="/_header"></th:block>
+<div class="main-block">
+    <form method="post" th:action="@{/admin/brandAdd}" enctype="multipart/form-data" class="registration-data-input">
+        <h3 class="category-data-input-head category-data-input-item" >Добаление нового бренда продуктов</h3>
+        <h3 style="color: red" th:text="${message}"></h3>
+        <div class="category-data-input-item">
+            Название нового бренда : <input type="text" name="brandName" required>
+        </div>
+        <div class="category-data-input-item">
+            Логотип бренда : <input type="file" name="brandImg" required>
+        </div>
+        <div class="category-data-input-item">
+            <input type="submit" value="Добавить">
+        </div>
+    </form>
+</div>
+<th:block th:include="/_footer"></th:block>
+</body>
+</html>

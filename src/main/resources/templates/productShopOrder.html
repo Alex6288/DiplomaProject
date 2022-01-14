@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <th:block th:include="/_main_block_css"></th:block>
+    <link rel="stylesheet" th:href="@{/css/productShopCart.css}" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Список пользователей</title>
+</head>
+<body>
+<th:block th:include="/_header"></th:block>
+<div class="main-block">
+    <p> Ваша заказ : </p>
+    <h2 th:if="${message}" style="color: blue" th:text="${message}"></h2>
+    <h2 th:if="${error}" style="color: red" th:text="${error}"></h2>
+    <table style="border-collapse: collapse">
+        <tr>
+            <td class="table-item">Имя продукта</td>
+            <td class="table-item">Стоимость(руб/1шт)</td>
+            <td class="table-item">Колличество(Шт)</td>
+            <td class="table-item">Итог(руб)</td>
+        </tr>
+        <tr th:each="product : ${productList}">
+            <td class="table-item" ><span th:text="${product.productName}"></span></td>
+            <td class="table-item" th:id="${'price' + product.id}" id="" th:text="${product.price}"></td>
+            <td class="table-item" align="center"><input class="table-item-num" type="number" name="price" th:value="${shopCartList.getNumProductByProductId(product.id)}"   th:id="${product.id}" readonly></td>
+            <td class="table-item" ><span name="productPriceTotal" th:id="${'priceProducEnd' + product.id}" th:text="${product.price}"></span></td>
+        </tr>
+        <tr>
+            <td class="table-item">Итого </td>
+            <td class="table-item" colspan="4" id="totalPrice"></td>
+        </tr>
+    </table>
+    <form class="order-form" th:action="@{/shopCart/placeOrder/submit}" method="post">
+        <span th:if="${user}" >Заказщик</span>
+        <input class="order-form-item" type="text" name="customer" required th:if="${user}" th:value="${user.firstName + ' ' + user.middleName}" th:readonly="${true}">
+        <span  >Контактное лицо</span>
+        <input class="order-form-item" type="text"   name="contact" required  th:if="${user}" th:value="${user.firstName + ' ' + user.middleName}">
+        <input class="order-form-item" type="text"   name="contact" required  th:unless="${user}"  th:value="${'Введите ваше имя'}">
+        <span>Контактный номер</span>
+        <input class="order-form-item" type="tel" name="phone" th:if="${user}"     th:value="${user.phone}" th:readonly="${true}" required>
+        <input class="order-form-item" type="tel" name="phone" th:unless="${user}" th:value="${'номер телефона'}"required>
+        <span>Электронная почта</span>
+        <input class="order-form-item" type="email" name="email" th:if="${user}" th:value="${user.email}"  th:readonly="${true}" required>
+        <input class="order-form-item" type="email" name="email" th:unless="${user}"  th:value="${'Введите электронную почту'}" required>
+        <span >Адрес доставки</span>
+        <input class="order-form-item" type="text" id="address" name="address" required>
+        <input class="order-form-item" type="submit" value="Заказать">
+    </form>
+</div>
+<th:block th:include="/_footer"></th:block>
+<script type="text/javascript" th:src="@{/js/productShopOrder.js}"></script>
+</body>
+</html>

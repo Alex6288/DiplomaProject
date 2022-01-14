@@ -1,0 +1,28 @@
+.content-manufacturing{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    height: max-content;
+    background: -webkit-radial-gradient(top, forestgreen, white);
+    background: -o-radial-gradient(top, forestgreen, white);
+    background: -ms-radial-gradient(top, forestgreen, white);
+}
+
+.content-manufacturing-item{
+    display: flex;
+    flex-flow: wrap row;
+    margin: 1em;
+    justify-content: space-between;
+    border-radius: 0.5em;
+    border: 1px black solid;
+}
+
+.content-manufacturing-header{
+    text-align: center;
+    margin: 1em;
+}
+
+.content-manufacturing-img{
+    height: 8em;
+    width: auto;
+}

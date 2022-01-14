@@ -1,0 +1,27 @@
+.login-main {
+    display: flex;
+    flex-grow: 3;
+    font-size: 1.2em;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5em;
+    background: -webkit-linear-gradient(top, forestgreen, greenyellow);
+    background: -o-linear-gradient(top, forestgreen, greenyellow);
+    background: -ms-linear-gradient(top, forestgreen, greenyellow);
+
+}
+.login-data-form{
+    display: flex;
+    border: 1px black solid;
+    border-radius: 0.5em;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+.login-data-item{
+    display: flex;
+    margin: 0.5em;
+    flex-direction: row;
+    justify-content: space-around;
+}

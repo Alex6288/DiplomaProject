@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменить продукт</title>
+    <link rel="stylesheet" th:href="@{/css/categoryAdd.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/header.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/footer.css}" type="text/css">
+</head>
+<body>
+<th:block th:include="/_header"></th:block>
+<div class="main-block">
+    <form method="post" th:action="@{/admin/productUpdate}" enctype="multipart/form-data" class="registration-data-input">
+        <input type="hidden" name="productId" th:value="${product.getId()}">
+        <h3 class="category-data-input-head category-data-input-item">Изменить продукт</h3>
+        <h3 style="color: red" th:text="${message}"></h3>
+        <div class="category-data-input-item">
+            <span class="category-data-input-item-element">Название продукта :</span> <input
+                class="category-data-input-item-element" type="text" th:value="${product.getProductName()}" name="productName" required>
+        </div>
+        <div class="category-data-input-item">
+            <span class="category-data-input-item-element">Категория продуктов :</span>
+            <select class="category-data-input-item-element" name="productCategory" required>
+                <option th:each="category : ${categoryList}" th:text="${category.getCategoryName()}"
+                th:if="${category.getCategoryName() == product.getCategory().getCategoryName()}" th:selected="selected"></option>
+            </select>
+        </div>
+        <div class="category-data-input-item">
+            <span class="category-data-input-item-element"> Бренд :</span>
+            <select class="category-data-input-item-element" name="productBrand" required>
+                <option th:each="brand : ${brandList}" th:text="${brand}"
+                        th:if="${brand == product.getBrand().getBrandName()}" th:selected="selected"></option>
+            </select>
+        </div>
+        <div class="category-data-input-item">
+            <span class="category-data-input-item-element">Количество :</span> <input th:value="${product.getQuantity()}"
+                class="category-data-input-item-element" type="number" name="productQuantity" required>
+        </div>
+        <div class="category-data-input-item">
+            <span class="category-data-input-item-element">Стоимость :</span> <input th:value="${product.getPrice()}"
+                class="category-data-input-item-element" type="number" name="productPrice" required>
+        </div>
+        <div class="category-data-input-item">
+            <span class="category-data-input-item-element"> Короткое описание :</span> <textarea th:text="${product.getDescription_short()}"
+                class="category-data-input-item-element" name="productDscrShort" cols="20" rows="5" required></textarea>
+        </div>
+        <div class="category-data-input-item">
+            <span class="category-data-input-item-element">Полное описание :</span> <textarea th:text="${product.getDescription_full()}"
+                class="category-data-input-item-element" name="productDscrFull" cols="30" rows="10" required></textarea>
+        </div>
+        <div class="category-data-input-item">
+            <span class="category-data-input-item-element">Фото продукта :</span> <input
+                class="category-data-input-item-element" type="file" name="productImg">
+        </div>
+        <div class="category-data-input-item">
+            <input type="submit" value="Обновить">
+        </div>
+    </form>
+</div>
+<th:block th:include="/_footer"></th:block>
+</body>
+</html>

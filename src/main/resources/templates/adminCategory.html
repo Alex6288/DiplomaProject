@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Управление продуктами</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    <th:block th:include="/_main_block_css"></th:block>
+    <link rel="stylesheet" th:href="@{/css/admin_main.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/admin_product.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/admin_users.css}" type="text/css">
+
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<body>
+<th:block th:include="/_header"></th:block>
+<th:block th:include="/_adminMain"></th:block>
+
+<div class="content-main-block">
+
+
+    <table class="admin-users-table">
+        <tr>
+            <td>
+                <a th:href="@{/admin/categoryAdd}"><button class="btn-manage" style="background-color: greenyellow; color: black" >Добавить категорию</button></a>
+            </td>
+            <td style="color: green" th:if="${message != null}" th:text="${message}" th:style="${message.contains('шибка') ? 'color:red' : 'color: green'}"></td>
+        </tr>
+        <tr>
+            <td class="admin-users-table-item"> Id </td>
+            <td class="admin-users-table-item"><a th:href="@{'/admin/category/' + ${currentPage} + '?sortDir=' + ${reverseSortDir} + '&sortField=categoryName'}">Имя категории</a></td>
+            <td class="admin-users-table-item">Управление</td>
+        </tr>
+        <tr th:each="category : ${categoryList}">
+            <td class="admin-users-table-item" th:text="${category.getId()}"></td>
+            <td class="admin-users-table-item" th:text="${category.getCategoryName()}"></td>
+            <td class="admin-users-table-item"><a th:href="@{'/admin/categoryDelete/' + ${category.getId()}}"><button  class="btn-manage" style="background-color: red; color: white">Удалить</button></a>
+                <a th:href="@{'/admin/categoryUpdate/' + ${category.getId()}}"><button  class="btn-manage" style="background-color: blue; color: white">Изменить</button></a></td>
+        </tr>
+        <tr>
+            <td th:text="'Всего категорий : ' + ${totalCategory}"></td>
+        </tr>
+        <tr>
+            <td> Страница : </td>
+            <td> <span th:each="i : ${#numbers.sequence(1, totalPages)}">
+                    <a th:if="${currentPage != i}" th:href="@{'/admin/category/' + ${i} + '?sortDir=' + ${sortDir} + '&sortField=' + ${sortField}}">[[${i}]]</a>
+                    <span th:unless="${currentPage != i}">[[${i}]]</span>
+                </span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<th:block th:include="/_footer"></th:block>
+
+</body>
+</html>
+</body>
+</html>

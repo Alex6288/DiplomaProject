@@ -1,0 +1,56 @@
+<div >
+    <div class="header-top">
+        <div class="header-top-menu">
+            <a class="header-top-menu-item" th:href="@{/home}"> Главная </a>
+            <a class="header-top-menu-item" href=""> О магазине </a>
+            <a class="header-top-menu-item" href=""> Доставка и оплата </a>
+            <a class="header-top-menu-item" href=""> Статьи и рецепты </a>
+            <a class="header-top-menu-item" href=""> Производители </a>
+            <a class="header-top-menu-item" href=""> Контакты </a>
+            <span class="header-top-menu-item" th:if="${#request.userPrincipal != null}">
+                <a th:if="${#request.userPrincipal.getName() == 'admin'}" th:href="@{/admin}" >Управление сайтом</a>
+            </span>
+        </div>
+        <div class="header-top-signup">
+<!--        todo    добавить условия для кнопки либо выход либо выход-->
+
+<!--        todo    сделать всплывающим списком со ссылками-->
+            <div  class="header-top-signup-item">
+                <img class="header-top-signup-icon" th:src="@{/img/main/cabinet.png}" alt="человечек">
+                <span class="header-top-signup-item-elem"><a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Выйти</a></span>
+                <span class="header-top-signup-item-elem"><a th:unless="${#request.userPrincipal != null}" th:href="@{/auth/signin}">Войти</a></span>
+                <span class="header-top-signup-item-elem"><a th:if="${#request.userPrincipal == null}" th:href="@{/auth/signup}">Зарегестрироваться</a></span>
+                <span class="header-top-signup-item-elem"><a th:unless="${#request.userPrincipal == null}" th:href="@{/user/cabinet}">Личный кабинет</a></span>
+            </div>
+            <div class="header-top-signup-item header-top-signup-item-login">
+               <span th:if="${#request.userPrincipal != null}" th:text="${'Вы вошли как ' + #request.userPrincipal.getName()}"></span>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="header-bot">
+        <div class="header-bot-first">
+            <div class="header-bot-logo">
+                <img class="header-logo-img" th:src="@{/img/main/логотип_урал_русь.jpg}" alt=""/>
+            </div>
+            <form th:action="@{/productShop}" method="post" class="header-bot-find-line">
+                <input name="findByName" type="text" placeholder="Поиск по товарам">
+                <input type="hidden" id="findByName" th:if="${findByName}" th:value="${findByName}">
+                <button id="search" type="submit"><img  class="search-icon" th:src="@{/img/main/search-icon.jpeg}" alt="лупа"></button>
+            </form>
+            <div class="header-bot-bag-box">
+                <label id="labelShopCart" for="shopCart" style="background-color: red; color: white" th:text="${numProductShopCart}"></label>
+                <a id="shopCart" th:href="@{/shopCart}"><img class="header-bot-bag-box-icon" th:src="@{/img/main/green-glossy-icon.jpeg}" alt="Корзина "></a>
+            </div>
+        </div>
+
+        <div class="header-bot-products-menu" >
+            <a class="header-bot-products-menu-item" th:href="@{/productShop(categoryId='0')}">Все продукты</a>
+            <a class="header-bot-products-menu-item" th:each="category :${categoryList}" th:text="${category.categoryName}" th:href="@{/productShop(categoryId=${category.id})}"></a>
+        </div>
+
+    </div>
+</div>
+

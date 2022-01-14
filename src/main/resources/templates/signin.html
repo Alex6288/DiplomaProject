@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/header.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/footer.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login.css}" type="text/css">
+</head>
+<style>
+
+</style>
+<body>
+
+<th:block th:include="/_header"></th:block>
+
+<div class="login-main">
+    <form th:action="@{/auth/signin}" class="login-data-form" method="post">
+        <div class="login-data-item">
+            Логин  <input id="login" type="text" name="login" required>
+        </div>
+        <div class="login-data-item">
+            Пароль  <input id="password" type="password" name="password" required>
+        </div>
+        <div class="login-data-item">
+            <label for="remember">Remember Me</label>
+            <input type="checkbox" id="remember" name="remember-me">
+        </div>
+        <div class="login-data-item">
+            <input type="submit" value="Войти">
+        </div>
+
+        <div>
+            <span style="color: red" th:if="${error}" th:text="${error}" ></span>
+        </div>
+    </form>
+</div>
+
+<th:block th:include="/_footer"></th:block>
+
+</body>
+<script>
+
+function signin() {
+    let log = $("login");
+    let pass = $("password");
+    $.ajax({
+        type: 'POST',
+        url: '/auth/signin',
+        dataType: "json",
+        data: {
+            loginRequest : {
+                login: "user",
+                password: "user"
+            }
+        },
+        success: function (data) {
+            console.log('Submission was successful.');
+            console.log(data);
+        },
+        error: function (data) {
+            console.log('An error occurred.');
+            console.log(data);
+        },
+        beforeSend: function (data) {
+            console.log('Before sending data ... ');
+            console.log(data);
+        }
+    });
+}
+</script>
+</html>

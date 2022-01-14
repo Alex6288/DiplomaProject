@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить продукт</title>
+    <link rel="stylesheet" th:href="@{/css/categoryAdd.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/header.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/footer.css}" type="text/css">
+</head>
+<body>
+<th:block th:include="/_header"></th:block>
+<div class="main-block">
+    <form method="post" th:action="@{/admin/productAdd}" enctype="multipart/form-data" class="registration-data-input">
+        <h3 class="category-data-input-head category-data-input-item">Добаление продуктов</h3>
+        <h3 style="color: red" th:text="${message}"></h3>
+        <div class="category-data-input-item">
+            <span class="category-data-input-item-element">Название продукта :</span> <input
+                class="category-data-input-item-element" type="text" name="productName" required>
+        </div>
+        <div class="category-data-input-item">
+            <span class="category-data-input-item-element">Категория продуктов :</span>
+            <select class="category-data-input-item-element" name="productCategory" required>
+                <option th:each="category : ${categoryList}" th:text="${category.getCategoryName()}"></option>
+            </select>
+        </div>
+        <div class="category-data-input-item">
+            <span class="category-data-input-item-element"> Бренд :</span>
+            <select class="category-data-input-item-element" name="productBrand" required>
+                <option th:each="brand : ${brandList}" th:text="${brand}"></option>
+            </select>
+        </div>
+        <div class="category-data-input-item">
+            <span class="category-data-input-item-element">Количество :</span> <input
+                class="category-data-input-item-element" type="number" name="productQuantity" required>
+        </div>
+        <div class="category-data-input-item">
+            <span class="category-data-input-item-element">Стоимость :</span> <input
+                class="category-data-input-item-element" type="number" name="productPrice" required>
+        </div>
+        <div class="category-data-input-item">
+            <span class="category-data-input-item-element"> Короткое описание :</span> <textarea
+                class="category-data-input-item-element" name="productDscrShort" cols="20" rows="5" required></textarea>
+        </div>
+        <div class="category-data-input-item">
+            <span class="category-data-input-item-element">Полное описание :</span> <textarea
+                class="category-data-input-item-element" name="productDscrFull" cols="30" rows="10" required></textarea>
+        </div>
+        <div class="category-data-input-item">
+            <span class="category-data-input-item-element">Фото продукта :</span> <input
+                class="category-data-input-item-element" type="file" name="productImg" required>
+        </div>
+        <div class="category-data-input-item">
+            <input type="submit" value="Добавить">
+        </div>
+    </form>
+</div>
+<th:block th:include="/_footer"></th:block>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Управление пользователями</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    <th:block th:include="/_main_block_css"></th:block>
+    <link rel="stylesheet" href="/css/admin_main.css" type="text/css">
+    <link rel="stylesheet" href="/css/admin_users.css" type="text/css">
+
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<body>
+<th:block th:include="/_header"></th:block>
+<th:block th:include="/_adminMain"></th:block>
+
+<div class="content-main-block">
+    <table class="admin-users-table">
+        <tr>
+            <td>
+                <a th:href="@{/admin/userAdd}">
+                    <button class="btn-manage" style="background-color: greenyellow; color: black">Добавить
+                        пользователя
+                    </button>
+                </a>
+            </td>
+            <td style="color: green" th:if="${message != null}" th:text="${message}"
+                th:style="${message.contains('шибка') ? 'color:red' : 'color: green'}"></td>
+        </tr>
+        <tr>
+            <td class="admin-users-table-item"> Id</td>
+            <td class="admin-users-table-item"><a
+                    th:href="@{'/admin/' + ${currentPage} + '?sortDir=' + ${reverseSortDir} + '&sortField=firstName'}">Имя</a>
+            </td>
+            <td class="admin-users-table-item"><a
+                    th:href="@{'/admin/' + ${currentPage} + '?sortDir=' + ${reverseSortDir} + '&sortField=lastName'}">Фамилия</a>
+            </td>
+            <td class="admin-users-table-item"><a
+                    th:href="@{'/admin/' + ${currentPage} + '?sortDir=' + ${reverseSortDir} + '&sortField=middleName'}">Отчество</a>
+            </td>
+            <td class="admin-users-table-item"><a
+                    th:href="@{'/admin/' + ${currentPage} + '?sortDir=' + ${reverseSortDir} + '&sortField=login'}">Логин</a>
+            </td>
+            <td class="admin-users-table-item"><a
+                    th:href="@{'/admin/' + ${currentPage} + '?sortDir=' + ${reverseSortDir} + '&sortField=phone'}">Телефон</a>
+            </td>
+            <td class="admin-users-table-item"><a
+                    th:href="@{'/admin/' + ${currentPage} + '?sortDir=' + ${reverseSortDir} + '&sortField=email'}">Почта</a>
+            </td>
+            <td class="admin-users-table-item"><a
+                    th:href="@{'/admin/' + ${currentPage} + '?sortDir=' + ${reverseSortDir} + '&sortField=cityName'}">Город</a>
+            </td>
+            <td class="admin-users-table-item"><a
+                    th:href="@{'/admin/' + ${currentPage} + '?sortDir=' + ${reverseSortDir} + '&sortField=countryName'}">Страна</a>
+            </td>
+            <td class="admin-users-table-item">Активность</td>
+            <td class="admin-users-table-item">Управление</td>
+        </tr>
+        <tr th:each="user : ${userList}">
+            <td class="admin-users-table-item" th:text="${user.getId()}"></td>
+            <td class="admin-users-table-item" th:text="${user.getFirstName()}"></td>
+            <td class="admin-users-table-item" th:text="${user.getLastName()}"></td>
+            <td class="admin-users-table-item" th:text="${user.getMiddleName()}"></td>
+            <td class="admin-users-table-item" th:text="${user.getLogin()}"></td>
+            <td class="admin-users-table-item" th:text="${user.getPhone()}"></td>
+            <td class="admin-users-table-item" th:text="${user.getEmail()}"></td>
+            <td class="admin-users-table-item" th:text="${user.getCityName()}"></td>
+            <td class="admin-users-table-item" th:text="${user.getCountryName()}"></td>
+            <td class="admin-users-table-item" th:text="${user.isActive()}"></td>
+            <td class="admin-users-table-item">
+                <a th:href="@{/admin/deleteUser/id(id=${user.getId()})}">
+                    <button class="btn-manage" style="background-color: red; color: white">Удалить</button>
+                </a>
+                <a th:href="@{/admin/lockedUser/id(id=${user.getId()})}">
+                    <button class="btn-manage" style="background-color: blue; color: white"  th:if="${user.active}" th:text="'Заблокировать'"></button>
+                    <button class="btn-manage" style="background-color: blue; color: white"  th:unless="${user.active}" th:text="'Разблокировать'"></button>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td th:text="'Всего пользователей : ' + ${totalUsers}"></td>
+        </tr>
+        <tr>
+            <td> Страница :</td>
+            <td> <span th:each="i : ${#numbers.sequence(1, totalPages)}">
+                    <a th:if="${currentPage != i}"
+                       th:href="@{'/admin/' + ${i} + '?sortDir=' + ${sortDir} + '&sortField=' + ${sortField}}">[[${i}]]</a>
+                    <span th:unless="${currentPage != i}">[[${i}]]</span>
+                </span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<th:block th:include="/_footer"></th:block>
+
+</body>
+</html>
+</body>
+</html>

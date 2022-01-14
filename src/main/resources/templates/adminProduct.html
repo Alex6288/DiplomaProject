@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Управление продуктами</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    <th:block th:include="/_main_block_css"></th:block>
+    <link rel="stylesheet" th:href="@{/css/admin_main.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/admin_product.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/admin_users.css}" type="text/css">
+
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<body>
+<th:block th:include="/_header"></th:block>
+<th:block th:include="/_adminMain"></th:block>
+
+<div class="content-main-block">
+
+
+    <table class="admin-users-table">
+        <tr>
+            <td>
+                <a th:href="@{/admin/productAdd}"><button class="btn-manage" style="background-color: greenyellow; color: black" >Добавить продукт</button></a>
+            </td>
+            <td style="color: green" th:if="${message != null}" th:text="${message}" th:style="${message.contains('шибка') ? 'color:red' : 'color: green'}"></td>
+        </tr>
+        <tr>
+            <td class="admin-users-table-item"> Id </td>
+            <td class="admin-users-table-item"><a th:href="@{'/admin/product/' + ${currentPage} + '?sortDir=' + ${reverseSortDir} + '&sortField=productName'}">Название</a></td>
+            <td class="admin-users-table-item"><a th:href="@{'/admin/product/' + ${currentPage} + '?sortDir=' + ${reverseSortDir} + '&sortField=category'}">Категория</a></td>
+            <td class="admin-users-table-item"><a th:href="@{'/admin/product/' + ${currentPage} + '?sortDir=' + ${reverseSortDir} + '&sortField=brandName'}">Бренд</a></td>
+            <td class="admin-users-table-item"><a th:href="@{'/admin/product/' + ${currentPage} + '?sortDir=' + ${reverseSortDir} + '&sortField=price'}">Цена</a></td>
+            <td class="admin-users-table-item"><a th:href="@{'/admin/product/' + ${currentPage} + '?sortDir=' + ${reverseSortDir} + '&sortField=quantity'}">Количество</a></td>
+            <td class="admin-users-table-item"><a th:href="@{'/admin/product/' + ${currentPage} + '?sortDir=' + ${reverseSortDir} + '&sortField=quantityBy'}">Сколько раз купили</a></td>
+            <td class="admin-users-table-item"><a th:href="@{'/admin/product/' + ${currentPage} + '?sortDir=' + ${reverseSortDir} + '&sortField=description_short'}">Описание</a></td>
+            <td class="admin-users-table-item"><a th:href="@{'/admin/product/' + ${currentPage} + '?sortDir=' + ${reverseSortDir} + '&sortField=mainPhotoPath'}">Фото</a></td>
+            <td class="admin-users-table-item">Управление</td>
+        </tr>
+        <tr th:each="product : ${productList}">
+            <td class="admin-users-table-item" th:text="${product.getId()}"></td>
+            <td class="admin-users-table-item" th:text="${product.getProductName()}"></td>
+            <td class="admin-users-table-item" th:text="${product.getCategory().getCategoryName()}"></td>
+            <td class="admin-users-table-item" th:text="${product.getBrand().getBrandName()}"></td>
+            <td class="admin-users-table-item" th:text="${product.getPrice()}"></td>
+            <td class="admin-users-table-item" th:text="${product.getQuantity()}"></td>
+            <td class="admin-users-table-item" th:text="${product.getQuantityBy()}"></td>
+            <td class="admin-users-table-item" th:text="${product.getDescription_short()}"></td>
+            <td class="admin-users-table-item" th:text="${product.getMainPhotoPath()}"></td>
+            <td class="admin-users-table-item">
+                <a th:href="@{'/admin/productDelete/' + ${product.getId()}}"><button  class="btn-manage" style="background-color: red; color: white">Удалить</button></a>
+                <a th:href="@{'/admin/productUpdate/' + ${product.getId()}}"><button  class="btn-manage" style="background-color: blue; color: white">Изменить</button></a>
+            </td>
+        </tr>
+        <tr>
+            <td th:text="'Всего продуктов : ' + ${totalProduct}"></td>
+        </tr>
+        <tr>
+            <td> Страница : </td>
+            <td> <span th:each="i : ${#numbers.sequence(1, totalPages)}">
+                    <a th:if="${currentPage != i}" th:href="@{'/admin/product/' + ${i} + '?sortDir=' + ${sortDir} + '&sortField=' + ${sortField}}">[[${i}]]</a>
+                    <span th:unless="${currentPage != i}">[[${i}]]</span>
+                </span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<th:block th:include="/_footer"></th:block>
+
+</body>
+</html>
+</body>
+</html>

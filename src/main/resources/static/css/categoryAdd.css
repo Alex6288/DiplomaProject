@@ -1,0 +1,27 @@
+.main-block {
+    display: flex;
+    justify-content: center;
+}
+.registration-data-input{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: max-content;
+    margin: 0.5em;
+    background: -webkit-linear-gradient(top, forestgreen, greenyellow);
+    background: -o-linear-gradient(top, forestgreen, greenyellow);
+    background: -ms-linear-gradient(top, forestgreen, greenyellow);
+}
+.category-data-input-item{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2em;
+    margin: 0.5em;
+}
+
+.category-data-input-item-element{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+

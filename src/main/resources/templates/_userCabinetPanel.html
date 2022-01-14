@@ -1,0 +1,19 @@
+<div class="main-block-element">
+    <div class="element-login-name">
+        <span th:if="${user}" th:text="${'Ваш логин : ' + user.login}"></span>
+    </div>
+    <div class="element-manage-panel">
+        <div class="element-manage-panel-item">
+            <a th:href="@{/user/cabinet}">Панель управления </a>
+        </div>
+        <div class="element-manage-panel-item">
+            <a th:href="@{/user/orders}">Заказы</a>
+        </div>
+        <div class="element-manage-panel-item">
+            <a th:href="@{/user/info}">Личная информация</a>
+        </div>
+        <div class="element-manage-panel-item">
+            <a th:href="@{/logout}">Выход</a>
+        </div>
+    </div>
+</div>

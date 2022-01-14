@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить пользователя</title>
+    <link rel="stylesheet" th:href="@{/css/registration.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/header.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/footer.css}" type="text/css">
+</head>
+<body>
+<th:block th:include="/_header"></th:block>
+<div class="main-block">
+
+<!--    todo отработать правильность добавления данных через скрипт - логин не повторялся и пароли совподают-->
+
+    <form method="post" th:action="@{/admin/userAdd}" class="registration-data-input">
+        <h3 class="registration-data-input-head registration-data-input-item" >Регистрация нового пользователя</h3>
+        <h3 style="color: red" th:text="${message}"></h3>
+        <span class="error-label"></span>
+        <div class="registration-data-input-login registration-data-input-item">
+            <div>Логин : <span class="required">*</span></div> <input type="text" name="login" required>
+        </div>
+        <div class="registration-data-input-pass registration-data-input-item">
+            <div>Пароль : <span class="required">*</span></div><input type="password" name="pass" required>
+        </div>
+        <div class="registration-data-input-pass-repeat registration-data-input-item">
+<!--            todo проверка на совпадение паролей-->
+            <div>Повторите пароль : <span class="required">*</span></div><input type="password" name="passRepeat" required>
+        </div>
+        <div class="registration-data-input-first-name registration-data-input-item">
+            <div>Имя : <span class="required">*</span></div><input type="text" name="firstName" required>
+        </div>
+        <div class="registration-data-input-last-name registration-data-input-item">
+            <div>Фамилия : <span class="required">*</span></div><input type="text" name="lastName" required>
+        </div>
+        <div class="registration-data-input-middle-name registration-data-input-item">
+            Отчество : <input type="text" name="middleName">
+        </div>
+        <div class="registration-data-input-phone registration-data-input-item">
+            <div>Номер телефона : <span class="required">*</span></div><input type="tel" name="phone" required>
+        </div>
+        <div class="registration-data-input-email registration-data-input-item">
+            <div>Электронная почта : <span class="required">*</span></div><input type="email" name="email" required>
+        </div>
+        <div class="registration-data-input-country-name registration-data-input-item">
+            Страна :  <select class="registration-data-select-country-name" name="countryName">
+            <option selected>Россия</option>
+            <option>Казахстан</option>
+        </select>
+        </div>
+        <div class="registration-data-input-city-name registration-data-input-item">
+            Город : <select class="registration-data-select-city-name" name="cityName">
+            <option selected>Екатеринбург</option>
+            <option>Арти</option>
+            <option>Нижний-Тагил</option>
+        </select>
+        </div>
+        <div class="registration-data-submit registration-data-input-item">
+            <input type="submit" value="Зарегестрироваться">
+        </div>
+    </form>
+</div>
+<th:block th:include="/_footer"></th:block>
+</body>
+</html>

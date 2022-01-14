@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Мои заказы</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <th:block th:include="/_main_block_css"></th:block>
+    <link rel="stylesheet" th:href="@{/css/userCabinet.css}" type="text/css">
+</head>
+<body>
+<th:block th:include="/_header"></th:block>
+<!--todo доделать чтобы информация сразу отображалась из таблицы хранилища-->
+<div class="main-block">
+    <th:block th:include="/_userCabinetPanel"></th:block>
+    <div class="main-block-element-content">
+        <div th:if="${orders}" th:text="${'У вас пока нет заказов'}"></div>
+        <div class="orderList" th:if="${orders}">
+            <table>
+                <tr>
+                    <td> Номер заказа </td>
+                    <td> Контактное лицо</td>
+                    <td> Адрес доставки </td>
+                    <td> Стоимость </td>
+                </tr>
+                <tr th:each="order : ${orders}">
+                    <td><button th:id="${order.orderNum}" th:text="${order.orderNum}" onclick="showOrderDetail(this)"></button></button> </td>
+                    <td th:text="${order.contact}"></td>
+                    <td th:text="${order.address}"></td>
+                    <td th:text="${order.totalPrice}"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="order-details-table">
+            <table id="order-details-table">
+            </table>
+        </div>
+    </div>
+
+</div>
+<th:block th:include="/_footer"></th:block>
+</body>
+<script>
+    function showOrderDetail(btn) {
+        let numOrder = btn.id;
+        $.get(
+            '/user/showOrderDetails/' + numOrder,
+            function (responseData){
+                console.log(' method showOrderDetail response')
+                viewOrderDetail(responseData);
+            }
+        )
+    }
+
+    function viewOrderDetail(order) {
+        console.log(order);
+        var orderNum = order[0].orderNum;
+        var view = '<tr> <td> Номер заказа </td> <td> ' + orderNum + ' </td> </tr>' +
+            '</tr> <tr>' + '<td> Имя продукта </td>' + '<td> Количество </td>' + '<td> Стоимость </td>' + '<td> Оценка </td>';
+        for (const orderElement of order) {
+               view += '<tr>' + '<td> ' + orderElement.product.productName + ' </td>' + '<td> ' + orderElement.numProduct + ' </td>' + '<td> ' + (orderElement.numProduct * orderElement.product.price)  + '</td>';
+               let view1 = "";
+               if (orderElement.mark != 0) {
+                   console.log("ставим не нулевую оценку")
+                   view += '<td>' + orderElement.mark + ' </td></tr>';
+               } else  if (orderElement.mark == 0){
+                   view += '<td><button value="1" onclick="putMark(this.value, ' + orderElement.product.id + ',' + orderNum + ')">1</button> &nbsp;';
+                   view += '<button value="2" onclick="putMark(this.value, ' + orderElement.product.id + ', ' + orderNum + ')">2</button> &nbsp;';
+                   view += '<button value="3" onclick="putMark(this.value, ' + orderElement.product.id + ', ' + orderNum + ')">3</button> &nbsp;';
+                   view += '<button value="4" onclick="putMark(this.value, ' + orderElement.product.id + ', ' + orderNum + ')">4</button> &nbsp;';
+                   view += '<button value="5" onclick="putMark(this.value, ' + orderElement.product.id + ', ' + orderNum + ')">5</button> &nbsp;</td>';
+                   view += '</tr>';
+               } else console.log("orderElement.mark type = " + (typeof orderElement.mark))
+        }
+        $("#order-details-table").html(view);
+    }
+
+    function putMark(mark, productId, orderNum) {
+        $.ajax({
+            type: 'PUT',
+            url: '/user/markPut',
+            async:true, //IMPORTANT, the call will be synchronous
+            data: {
+                mark : mark,
+                productId : productId,
+                orderNum : orderNum
+            }
+        }).done(function(data) {
+            console.log(data)
+            console.log('complete')
+            location.reload();
+        });
+    }
+</script>
+</html>

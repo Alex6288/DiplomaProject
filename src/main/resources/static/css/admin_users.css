@@ -1,0 +1,12 @@
+.content-main-block{
+    display: flex;
+    justify-content: center;
+}
+.admin-users-table{
+    border-collapse: collapse;
+    margin: 0.5em;
+}
+.admin-users-table-item{
+    padding: 0.5em;
+    border: black 1px solid;
+}

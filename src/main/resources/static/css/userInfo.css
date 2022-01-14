@@ -1,0 +1,39 @@
+.main-block {
+    background: -webkit-radial-gradient(top, forestgreen, white);
+    background: -o-radial-gradient(top, forestgreen, white);
+    background: -ms-radial-gradient(top, forestgreen, white);
+    display: flex;
+    flex-direction: row;
+    font-size: 1.2em;
+}
+
+.registration-data-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: max-content;
+    margin: 0.5em;
+    border: 1px black solid;
+
+}
+
+.registration-data-input-item {
+    display: flex;
+    flex-flow: nowrap column;
+    margin: 0.5em;
+}
+.errod-msg{
+    color: red;
+}
+
+.error-label {
+    display: none;
+}
+.registration-data-submit {
+    display: flex;
+    justify-content: center;
+}
+
+.required {
+    color:red;
+}

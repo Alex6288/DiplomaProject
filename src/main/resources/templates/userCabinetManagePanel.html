@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет</title>
+    <th:block th:include="/_main_block_css"></th:block>
+    <link rel="stylesheet" th:href="@{/css/pop_prod.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/userCabinet.css}" type="text/css">
+</head>
+<body>
+<th:block th:include="/_header"></th:block>
+<div class="main-block">
+    <th:block th:include="/_userCabinetPanel"></th:block>
+    <div class="main-block-element-content">
+        <div class="main-block-element-item" th:if="${message}" th:text="${message + ' ' + user.firstName + ' ' +  user.middleName + '!'}">
+        </div>
+        <div class="main-block-element-item" th:unless="${message}">
+            Добро пожаловать в личный кабинет &nbsp;<span th:text="${user.firstName + ' ' +  user.middleName + '!'}"></span>
+        </div>
+        <div class="main-block-element-item">
+            <div class="panel-item">
+                <a href="">
+                    <a th:href="@{/user/orders}"><button class="btn-panel">Заказы</button></a>
+                </a>
+            </div>
+            <div class="panel-item">
+                <a th:href="@{/user/info}">
+                    <button class="btn-panel">Личная информация</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:include="/_footer"></th:block>
+</body>
+</html>
