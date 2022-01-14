@@ -38,7 +38,7 @@ public class HomeController {
     }
 
 
-    //todo блок начальноего добавления данных убрать после отладки
+    //Блок начальной инициализации
 
     @Autowired
     IRolesRep rolesRep;

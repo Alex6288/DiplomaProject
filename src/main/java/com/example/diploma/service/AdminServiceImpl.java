@@ -45,7 +45,7 @@ public class AdminServiceImpl implements IAdminService {
             User lockUser = userRep.getById(id);
             lockUser.changeActive();
             userRep.save(lockUser);
-            return "Успешно"; //todo ркализовать метод
+            return "Успешно";
         } catch (Exception e ) {
             return "Ошибка блокирокки/разблокировки";
         }

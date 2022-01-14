@@ -10,9 +10,6 @@
 <body>
 <th:block th:include="/_header"></th:block>
 <div class="main-block">
-
-<!--    todo отработать правильность добавления данных через скрипт - логин не повторялся и пароли совподают-->
-
     <form method="post" th:action="@{/admin/userAdd}" class="registration-data-input">
         <h3 class="registration-data-input-head registration-data-input-item" >Регистрация нового пользователя</h3>
         <h3 style="color: red" th:text="${message}"></h3>
@@ -24,7 +21,6 @@
             <div>Пароль : <span class="required">*</span></div><input type="password" name="pass" required>
         </div>
         <div class="registration-data-input-pass-repeat registration-data-input-item">
-<!--            todo проверка на совпадение паролей-->
             <div>Повторите пароль : <span class="required">*</span></div><input type="password" name="passRepeat" required>
         </div>
         <div class="registration-data-input-first-name registration-data-input-item">

@@ -12,9 +12,6 @@
             </span>
         </div>
         <div class="header-top-signup">
-<!--        todo    добавить условия для кнопки либо выход либо выход-->
-
-<!--        todo    сделать всплывающим списком со ссылками-->
             <div  class="header-top-signup-item">
                 <img class="header-top-signup-icon" th:src="@{/img/main/cabinet.png}" alt="человечек">
                 <span class="header-top-signup-item-elem"><a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Выйти</a></span>

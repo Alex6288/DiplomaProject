@@ -63,7 +63,6 @@ public class ProductServiceImpl implements IProductService {
             , List<Object> categoryNames
             , String priceStart
             , String priceEnd) {
-        //todo параметны можно поставить в значение requared=false в @RequestParam
         Stream<Product> searchingProduct = productRep.findAll().stream();
         if (nameProduct != null && nameProduct != "") {
             System.out.println("по имени");
@@ -95,7 +94,6 @@ public class ProductServiceImpl implements IProductService {
         List<Product> resultList = searchingProduct.collect(Collectors.toList());
 
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-        //todo подумать как сделать проще вормирование страницы
         List<Product> resultPage = resultList.stream()
                 .skip((pageNo - 1) * pageSize)
                 .limit(pageSize)
