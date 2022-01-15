@@ -58,7 +58,6 @@ public class AuthServiceIml implements IAuthService {
             }
         }
         userNew.setRole(role);
-        System.out.println(" сохраняем пользователя с логином " + user.getLogin());
         userRep.save(userNew);
     }
 }

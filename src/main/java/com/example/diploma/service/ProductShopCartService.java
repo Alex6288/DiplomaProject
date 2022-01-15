@@ -27,29 +27,6 @@ public class ProductShopCartService implements IProductShopCart {
     ShopCart shopCart;
 
     @Override
-    public void addProductByIdInShopCart(Long productId, Long userId) {
-        Product product =productRep.getById(productId);
-//        if (!shopCartItemRep.existsByProductAndUserId(product, userId)){
-//            ShopCartItem shopCartItem = new ShopCartItem(product, 1, userId);
-//            shopCartItemRep.save(shopCartItem);
-//        }
-    }
-
-    @Override
-    public void deleteProductByIdInShopCart(Long productId, Long userId) throws NoSuchElementException {
-//        Product product =productRep.getById(productId);
-//        shopCartItemRep.delete(shopCartItemRep.findByProductAndAndUserId(product, userId).orElseThrow());
-    }
-
-    @Override
-    public void updateNumProductByIdInShopCart(Long productId, int num, Long userId) throws NoSuchElementException{
-//        Product product =productRep.getById(productId);
-//        ShopCartItem shopCartItem = shopCartItemRep.findByProductAndAndUserId(product,  userId).orElseThrow();
-//        shopCartItem.setNumProduct(num);
-//        shopCartItemRep.save(shopCartItem);
-    }
-
-    @Override
     public Set<ShopCartItem> getShopCartListByUserId(Long userId) throws NoSuchElementException {
         return null; //shopCartItemRep.findAllByUserId(userId);
     }
@@ -69,14 +46,7 @@ public class ProductShopCartService implements IProductShopCart {
             orderProductRep.save(orderProduct);
         }
         // обнуляем корзину
-        System.out.println();
-        System.out.println();
-        System.out.println("отчищаем корзину");
-        System.out.println("shopCart countOld = " + shopCart.getShopCartItemSet().size());
         shopCart.getShopCartItemSet().clear();
-        System.out.println("shopCart countNew = " + shopCart.getShopCartItemSet().size());
-        System.out.println();
-        System.out.println();
         //сохраняем заказ
         Set<OrderProduct> orderProducts = orderProductRep.findAllByOrderNum(orderNum);
         Integer totalOrderPrice = orderProductRep.sumTotalPriceByOrderNum(orderNum);
