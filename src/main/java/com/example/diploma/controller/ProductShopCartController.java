@@ -2,6 +2,7 @@ package com.example.diploma.controller;
 
 import com.example.diploma.entity.exception.ProductNotEnoughException;
 import com.example.diploma.entity.User;
+import com.example.diploma.service.EmailServiceImpl;
 import com.example.diploma.service.MainServiceImpl;
 import com.example.diploma.service.ProductShopCartService;
 import com.example.diploma.service.UserCabinetService;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.NoSuchElementException;
 
@@ -26,6 +26,8 @@ public class ProductShopCartController {
     UserCabinetService userCabinetService;
     @Autowired
     MainServiceImpl mainService;
+    @Autowired
+    EmailServiceImpl emailService;
 
     @GetMapping("")
     public String getShopCartPage(Model model, Principal principal){
@@ -97,8 +99,7 @@ public class ProductShopCartController {
                               @RequestParam String phone,
                               @RequestParam String email,
                               @RequestParam String address){
-
-        // todo добавить отправитель на почту заказа
+        model = mainService.addCategoriesOnPage(model);
         try {
             if (principal != null) {
                 User user = userCabinetService
@@ -106,13 +107,12 @@ public class ProductShopCartController {
                 shopCartService.saveOrderShopCart(user.getId(), contact, phone, email, address);
                 model.addAttribute("message", "Ваш заказ сделан");
                 model.addAttribute("user", user);
-                model = mainService.addCategoriesOnPage(model);
                 return "userCabinetManagePanel";
             } else {
                 String message = "Уважаемый " + contact + " ваш заказ сделан, продтверждение придет на указаную почту";
+                //emailService.sendSimpleEmail( email, "Спасибо за заказ!","Заказ уже собирается скоро вам позвонят");
                 shopCartService.saveOrderShopCart(userCabinetService.getGuestId(), contact, phone, email, address);
                 model.addAttribute("message", message);
-                model = mainService.addCategoriesOnPage(model);
                 return "guestSucseecOrder";
             }
         } catch (ProductNotEnoughException e) {

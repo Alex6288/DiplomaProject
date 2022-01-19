@@ -19,6 +19,8 @@ public class Orders {
     private String address;
     private int totalPrice;
     private Long orderNum;
+    @Enumerated(EnumType.ORDINAL)
+    private OrderStatus orderStatus;
 
     private static Long orderCount = Long.valueOf(1);
 
@@ -42,6 +44,15 @@ public class Orders {
         this.address = address;
         this.totalPrice = totalPrice;
         this.orderNum = orderNum;
+        this.orderStatus = OrderStatus.OPEN;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public String getPhone() {

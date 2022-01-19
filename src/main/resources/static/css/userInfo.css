@@ -22,7 +22,7 @@
     flex-flow: nowrap column;
     margin: 0.5em;
 }
-.errod-msg{
+.error-field{
     color: red;
 }
 

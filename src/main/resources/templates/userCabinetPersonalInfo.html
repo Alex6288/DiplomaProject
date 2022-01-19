@@ -12,56 +12,47 @@
 <div class="main-block">
     <th:block th:include="/_userCabinetPanel"></th:block>
     <div class="main-block-element-content">
-        <h3 th:if="${message}" th:text="${message}" style="color:green"></h3>
-        <h3 th:if="${error != null}" th:text="${error}"></h3>
-        <form th:unless="${error != null}" th:action="@{/user/updateInfo}" th:method="post" th:object="${user}">
-            <h3 class="registration-data-input-head registration-data-input-item">Персональная информация</h3>
+        <h3 th:if="${message}" th:text="${message}" style="color:black"></h3>
+        <form th:action="@{/user/updateInfo}" th:method="post" th:object="${user}">
+            <h3 class="registration-data-input-head registration-data-input-item" >Регистрация нового пользователя</h3>
             <div class="registration-data-input-login registration-data-input-item">
-                <div>Логин :</div>
-                <input type="text" name="login" th:field="*{login}" readonly>
+                <div class="error-field" th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Error field</div>
+                <div>Логин : <span class="required">*</span></div> <input type="text" name="login" id="login" th:field="*{login}"  >
+            </div>
+            <div class="registration-data-input-pass registration-data-input-item">
+                <input type="hidden" name="password" id="password" th:field="*{password}">
             </div>
             <div class="registration-data-input-first-name registration-data-input-item">
-                <div class="errod-msg" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
-                <div>Имя :
-                    <input type="text" name="firstName" th:field="*{firstName}" required>
-                </div>
+                <div class="error-field" th:if="${#fields.hasErrors('firstName')}"  th:errors="*{firstName}">Error field</div>
+                <div>Имя : <span class="required">*</span></div><input type="text" name="firstName" id="firstName" th:field="*{firstName}" >
             </div>
             <div class="registration-data-input-last-name registration-data-input-item">
-                <div class="errod-msg" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
-                <div>Фамилия :
-                    <input type="text" name="lastName" th:field="*{lastName}" required>
-                </div>
+                <div class="error-field" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Error field</div>
+                <div>Фамилия : <span class="required">*</span></div><input type="text" name="lastName" id="lastName" th:field="*{lastName}"  >
             </div>
             <div class="registration-data-input-middle-name registration-data-input-item">
-                <div class="errod-msg" th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}"></div>
-                <div>
-                    Отчество : <input type="text" name="middleName" th:field="*{middleName}" required>
-                </div>
+                Отчество : <input type="text" name="middleName" id="middleName" th:field="*{middleName}">
             </div>
             <div class="registration-data-input-phone registration-data-input-item">
-                <div class="errod-msg" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
-                <div>Номер телефона :
-                    <input type="tel" name="phone" th:field="*{phone}" required>
-                </div>
+                <div class="error-field" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Error field</div>
+                <div>Номер телефона : <span class="required">*</span></div><input type="tel" name="phone" id="phone" th:field="*{phone}"  >
             </div>
             <div class="registration-data-input-email registration-data-input-item">
-                <div class="errod-msg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
-                <div>Электронная почта :
-                <input type="email" name="email" th:field="*{email}" readonly>
-                </div>
+                <div class="error-field" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error field</div>
+                <div>Электронная почта : <span class="required">*</span></div><input type="email" name="email"id="email" th:field="*{email}"  >
             </div>
             <div class="registration-data-input-country-name registration-data-input-item">
-                <div class="errod-msg" th:if="${#fields.hasErrors('countryName')}" th:errors="*{countryName}"></div>
-                <div>Страна : <input type="text" name="countryName" th:field="*{countryName}" required>
-                </div>
+                <div class="error-field" th:if="${#fields.hasErrors('countryName')}" th:errors="*{countryName}">Error field</div>
+                <br>
+                <span>Страна :</span>  <input type="text" class="registration-data-select-country-name" name="countryName" id="countryName" th:field="*{countryName}">
             </div>
             <div class="registration-data-input-city-name registration-data-input-item">
-                <div class="errod-msg" th:if="${#fields.hasErrors('cityName')}" th:errors="*{cityName}"></div>
-                <div>Город : <input type="text" name="cityName" th:field="*{cityName}" required>
-                </div>
+                <div class="error-field" th:if="${#fields.hasErrors('cityName')}" th:errors="*{cityName}">Error field</div>
+                Город : <input type="text" class="registration-data-select-city-name" name="cityName" id="cityName" th:field="*{cityName}">
+
             </div>
             <div class="registration-data-submit registration-data-input-item">
-                <input type="submit" value="Обновить информацию">
+                <input type="submit" value="Обновить данные">
             </div>
         </form>
     </div>

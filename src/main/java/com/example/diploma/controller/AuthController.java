@@ -45,18 +45,6 @@ public class AuthController {
     @Autowired
     AuthServiceIml authServiceIml;
 
-    @Autowired
-    IUserRep userRep;
-
-    @Autowired
-    IRolesRep roleRep;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
-    @Autowired
-    JwtUtils jwtUtils;
-
     @GetMapping("/signin")
     public String getPageSigninUser(Model model) {
         model = mainService.addCategoriesOnPage(model);
@@ -107,13 +95,11 @@ public class AuthController {
                                Model model) {
         model = mainService.addCategoriesOnPage(model);
 
-        if (userRep.existsByLogin(user.getLogin())) {
-            model.addAttribute("message", "Пользователь с таким именем уже существует");
-            return "signup";
+        if (authServiceIml.isValidUserLogin(user.getLogin())) {
+            bindingResult.addError( new FieldError("user", "login", "Такой логин уже существует"));
         }
-        if (userRep.existsByEmail(user.getEmail())) {
-            model.addAttribute("message", "Пользователь с таким email уже существует");
-            return "signup";
+        if (authServiceIml.isValidUserEmail(user.getEmail())) {
+            bindingResult.addError( new FieldError("user", "email", "Пользователь с таким email уже существует"));
         }
         if (!user.getPassword().equals(passRepeat)){
             bindingResult.addError( new FieldError("user", "password", "Пароли не совпадают"));
@@ -125,15 +111,12 @@ public class AuthController {
             return "/signup";
 
         try {
-            System.out.println("Переходим в сервис регистрации");
             authServiceIml.registerUser(user);
-            System.out.println("Зарегестрировали");
         } catch (Exception e){
             e.printStackTrace();
             model.addAttribute("message", "Ошибка баззы данных, обратитесь к администратору");
             return "/signup";
         }
-        System.out.println("Переходим на страницу логина");
         model.addAttribute("message", "Пользователь зарегестрирован");
         return "redirect:/auth/signin";
     }

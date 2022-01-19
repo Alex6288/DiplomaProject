@@ -29,6 +29,21 @@ public class AuthServiceIml implements IAuthService {
     }
 
     @Override
+    public boolean isValidUserLogin(String login) {
+        if (userRep.existsByLogin(login)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isValidUserEmail(String email) {
+        if (userRep.existsByEmail(email))
+            return false;
+        return true;
+    }
+
+    @Override
     public void registerUser(User user){
         User userNew = new User(user.getFirstName(),
                 user.getMiddleName(),

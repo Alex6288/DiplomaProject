@@ -11,11 +11,12 @@
 
 .content-popular-product-item {
     display: flex;
-    height: max-content;
+    /*height: max-content;*/
     margin: 1em;
     border: 1px black solid;
     border-radius: 0.5em;
     width: 15em;
+    height: 25em;
     align-content: space-between;
     flex-direction: column;
     justify-content: space-between;
@@ -35,13 +36,13 @@
 
 .content-popular-product-header{
     text-align: center;
-    margin: 1em;
+    margin: 0.5em;
 }
 
 .content-popular-product-item-foto, .content-popular-product-item-short_dscr, .content-popular-product-item-rating,
 .content-popular-product-item-price, .content-popular-product-item-add_button {
     display:flex;
-    margin: 1em auto;
+    margin: 0.5em auto;
 }
 
 .content-popular-product-item-add_button{

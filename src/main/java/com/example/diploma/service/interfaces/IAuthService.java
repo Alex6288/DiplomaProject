@@ -6,4 +6,6 @@ import org.springframework.validation.BindingResult;
 public interface IAuthService {
     void registerUser(User user);
     boolean isValidUserPassword(String password);
+    boolean isValidUserLogin(String  login);
+    boolean isValidUserEmail(String email);
 }

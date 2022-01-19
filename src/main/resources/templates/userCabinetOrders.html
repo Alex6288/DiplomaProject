@@ -19,12 +19,14 @@
                     <td> Номер заказа </td>
                     <td> Контактное лицо</td>
                     <td> Адрес доставки </td>
+                    <td> Статус </td>
                     <td> Стоимость </td>
                 </tr>
                 <tr th:each="order : ${orders}">
                     <td><button th:id="${order.orderNum}" th:text="${order.orderNum}" onclick="showOrderDetail(this)"></button></button> </td>
                     <td th:text="${order.contact}"></td>
                     <td th:text="${order.address}"></td>
+                    <td th:text="${order.orderStatus.statusName}"></td>
                     <td th:text="${order.totalPrice}"></td>
                 </tr>
             </table>

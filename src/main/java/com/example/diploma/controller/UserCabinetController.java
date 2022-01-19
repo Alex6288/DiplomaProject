@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -54,14 +55,30 @@ public class UserCabinetController {
         }
     }
 
+    @GetMapping("/updateInfo")
+    public String getUserInfo(@ModelAttribute User user,Principal principal, Model model){
+        try{
+            model = mainService.addCategoriesOnPage(model);
+            System.out.println();
+            System.out.println();
+            System.out.println("GET updateInfo");
+            return "userCabinetPersonalInfo";
+        } catch ( Exception e) {
+            e.printStackTrace();
+            return "userCabinetManagePanel";
+        }
+    }
+
+
     @PostMapping("/updateInfo")
-    public String updateInfo(@Valid @ModelAttribute User user, BindingResult bindingResult, Model model){
+    public String updateInfo(@Valid @ModelAttribute User user,
+                             BindingResult bindingResult,
+                             Model model){
         try {
             model = mainService.addCategoriesOnPage(model);
             if (bindingResult.hasErrors()){
-                return "userCabinetPersonalInfo";
+                return "/updateInfo";
             }
-
             cabinetService.updateUserInfo(user);
             model.addAttribute("message", "Данные успешно изменены");
             model.addAttribute("user", cabinetService.getUserByLogin(user.getLogin()));
